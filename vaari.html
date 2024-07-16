@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codative Labs - Vaari 2024</title>
+    <link rel="icon" href="https://static.wixstatic.com/media/e78e78_b7939b0f67c542229c41d66851a09740~mv2.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/e78e78_b7939b0f67c542229c41d66851a09740~mv2.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* styles.css */
+        body {
+            font-family: "Palanquin", sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1d1d1d;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .branding {
+            width: max-content;
+            height: 30px;
+            padding: 10px 10px 10px 10px;
+            margin-top: 10px;
+            place-items: center;
+            background: rgba(0, 0, 0, 0.19);
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(11.9px);
+            -webkit-backdrop-filter: blur(11.9px);
+            border: 1px solid #ff631c;
+            text-decoration: none;
+            color: #afafaf;
+            transition: ease-in-out 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .branding:hover {
+            color: #ff631c;
+        }
+
+        .container {
+            display: flex;
+            padding: 5px 20px 5px 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 90%;
+            max-width: 1200px;
+            background-color: #ffffff;
+            margin-top: -15px;
+        }
+
+        .left-side,
+        .right-side {
+            flex: 1;
+            padding: 10px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+        }
+
+        .right-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left-side {
+            border-right: 1px solid #ccc;
+        }
+
+        .image-selection img {
+            width: 180px;
+            height: 180px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            border-radius: 10px;
+        }
+
+        .image-selection img.selected {
+            border-color: #ff631c;
+        }
+
+        .text-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .text-inputs input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #preview-button {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: solid 1px #ff631c;
+            background-color: #ff631c;
+            color: white;
+            cursor: pointer;
+            width: 300px;
+            transition: 0.3s ease-in-out;
+        }
+
+        #preview-button:hover {
+            background-color: transparent;
+            color: #ff631c;
+            border: solid 1px #ff631c;
+
+        }
+
+        .image-preview {
+            position: relative;
+            border-radius: 0px;
+            overflow: hidden;
+            text-align: center;
+            height: 450px;
+            width: 450px;
+            background-color: transparent;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 1;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .overlay-text {
+            color: rgb(255, 225, 0);
+            font-size: 16px;
+            text-align: center;
+            text-wrap: wrap;
+        }
+
+        #download-button,
+        #share-button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            width: 250px;
+        }
+
+        #download-button {
+            background-color: #28a745;
+            transition: 0.3s ease-in-out;
+            border: #28a745 1px solid;
+        }
+
+        #share-button {
+            margin-top: 5px;
+            background-color: #25d366;
+            border: 1px #25d366 solid;
+            transition: 0.3s ease-in-out;
+        }
+
+        #message-text {
+            transform: translate(0px, -380px);
+        }
+
+        #name-text {
+            transform: translate(140px, -25px);
+        }
+
+        #download-button:hover {
+            border: #28a745 1px solid;
+            background-color: transparent;
+            color: #28a745;
+        }
+
+        #share-button:hover {
+            background-color: transparent;
+            border: 1px solid #25d366;
+            color: #25d366;
+        }
+
+        nav {
+            margin-top: 0px;
+        }
+
+        nav img {
+            width: 280px;
+            height: auto;
+        }
+
+        #whatsapp-logo {
+            width: 25px;
+        }
+
+        @media (max-width: 768px) {
+
+            .branding {
+                margin-bottom: 20px;
+                margin-top: -10px;
+            }
+
+            .container {
+                flex-direction: column;
+                padding: 5px 5px 5px 5px;
+                margin-bottom: 20px;
+            }
+
+            body {
+                height: auto;
+                margin: 0;
+            }
+
+            .image-selection {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 10px;
+            }
+
+            .image-selection img {
+                width: 130px;
+                height: 130px;
+                margin: 5px;
+            }
+
+            .image-preview {
+                height: 300px;
+                width: 300px;
+
+            }
+
+            #preview-button {
+                width: 100%;
+            }
+
+            #download-button,
+            #share-button {
+                width: 100%;
+            }
+
+            .left-side {
+                border-right: 1px solid transparent;
+            }
+
+            #message-text {
+                transform: translate(0px, -245px);
+            }
+
+            #name-text {
+                transform: translate(100px, -15px);
+            }
+
+            .overlay-text {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="https://www.codativelabs.com/"><img src="https://static.wixstatic.com/media/e78e78_d6672b8ba0be4dc5a8328379c72b4ebe~mv2.png"></a>
+    </nav>
+    <div class="container">
+        <div class="left-side">
+            <div class="image-selection">
+                <img src="https://static.wixstatic.com/media/e78e78_a05f54ad145944d0aa93a8d1a4f23864~mv2.jpg"
+                    class="selectable-image" data-id="1" crossOrigin="anonymous">
+                <img src="https://static.wixstatic.com/media/e78e78_ab604454b6534317b5e1b1252cff5a80~mv2.jpg"
+                    class="selectable-image" data-id="2" crossOrigin="anonymous">
+                <img src="https://static.wixstatic.com/media/e78e78_12eb18dbae0044eea5462d62d55ff17f~mv2.png"
+                    class="selectable-image" data-id="3" crossOrigin="anonymous">
+                <img src="https://static.wixstatic.com/media/e78e78_52fd8aa976d84d9183a781b691c2d0d7~mv2.jpg"
+                    class="selectable-image" data-id="4" crossOrigin="anonymous">
+                <img src="https://static.wixstatic.com/media/e78e78_963086f52c014476805ddd5b85c76fed~mv2.png"
+                    class="selectable-image" data-id="5" crossOrigin="anonymous">
+                <img src="https://static.wixstatic.com/media/e78e78_1263ba1ce9f64344a11a2fdc6e38ac8e~mv2.png"
+                    class="selectable-image" data-id="6" crossOrigin="anonymous">
+            </div>
+            <div class="text-inputs">
+                <input type="text" id="name-input" placeholder="नाव प्रविष्ट करा">
+                <input type="text" id="message-input" placeholder="संदेश प्रविष्ट करा">
+                <button id="preview-button">Generate</button>
+            </div>
+        </div>
+        <div class="right-side">
+            <div id="image-preview" class="image-preview">
+                <img id="selected-image"
+                    src="https://static.wixstatic.com/media/e78e78_a05f54ad145944d0aa93a8d1a4f23864~mv2.jpg"
+                    alt="Selected Image" crossOrigin="anonymous">
+                <div class="text-overlay">
+                    <div id="message-text" class="overlay-text">संदेश</div>
+                    <div id="name-text" class="overlay-text">नाव</div>
+                </div>
+            </div>
+            <button id="download-button">Download</button>
+            <button id="share-button">Share on Whatsapp</svg></button>
+        </div>
+    </div>
+    <a href="https://www.codativelabs.com/" class="branding" target="_blank">
+        <div>Developed By Codative Labs</div>
+    </a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // script.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.selectable-image');
+            const selectedImage = document.getElementById('selected-image');
+            const nameInput = document.getElementById('name-input');
+            const messageInput = document.getElementById('message-input');
+            const nameText = document.getElementById('name-text');
+            const messageText = document.getElementById('message-text');
+            const previewButton = document.getElementById('preview-button');
+            const downloadButton = document.getElementById('download-button');
+            const shareButton = document.getElementById('share-button');
+
+            let currentSelectedImage = '';
+
+            images.forEach(image => {
+                image.addEventListener('click', () => {
+                    images.forEach(img => img.classList.remove('selected'));
+                    image.classList.add('selected');
+                    currentSelectedImage = image.src;
+                    selectedImage.src = currentSelectedImage;
+                });
+            });
+
+            previewButton.addEventListener('click', () => {
+                nameText.textContent = nameInput.value;
+                messageText.textContent = messageInput.value;
+            });
+
+            downloadButton.addEventListener('click', () => {
+                html2canvas(document.querySelector("#image-preview"), { useCORS: true, allowTaint: false }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = 'image.png';
+                    link.href = canvas.toDataURL();
+                    link.click();
+                });
+            });
+
+            shareButton.addEventListener('click', async () => {
+                const canvas = await html2canvas(document.querySelector("#image-preview"), { useCORS: true, allowTaint: false });
+                canvas.toBlob(blob => {
+                    const filesArray = [
+                        new File([blob], 'image.png', {
+                            type: blob.type,
+                            lastModified: new Date().getTime()
+                        })
+                    ];
+
+                    const shareData = {
+                        files: filesArray,
+                        text: `${messageInput.value}\n${nameInput.value}`
+                    };
+
+                    if (navigator.canShare && navigator.canShare(shareData)) {
+                        navigator.share(shareData).then(() => {
+                            console.log('Share successful');
+                        }).catch(error => {
+                            console.error('Error sharing:', error);
+                        });
+                    } else {
+                        console.warn('Your browser does not support sharing files.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
